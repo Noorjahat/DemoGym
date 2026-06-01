@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A premium luxury gym website with memberships, trainers, transformations, and testimonials." />
+  <title>ONYX Forge | Luxury Performance Gym</title>
+  <style>
+    :root {
+      --black: #030304;
+      --black-soft: #0a0a0d;
+      --panel: rgba(18, 18, 22, 0.66);
+      --panel-strong: rgba(26, 26, 32, 0.82);
+      --red: #e50914;
+      --red-hot: #ff2638;
+      --red-deep: #7a0309;
+      --white: #f7f7f8;
+      --muted: #a7a7ad;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow-red: 0 30px 90px rgba(229, 9, 20, 0.22);
+      --shadow-black: 0 24px 80px rgba(0, 0, 0, 0.5);
+      --radius: 8px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(229, 9, 20, 0.18), transparent 28rem),
+        radial-gradient(circle at 86% 22%, rgba(255, 38, 56, 0.12), transparent 30rem),
+        linear-gradient(180deg, #050505 0%, #0a090a 48%, #030304 100%);
+      color: var(--white);
+      font-family: var(--font);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: #f3b3b8;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section h2 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(2.15rem, 5vw, 4.9rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 32px));
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(12,12,15,0.76), rgba(20,20,25,0.42));
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.52);
+      backdrop-filter: blur(22px) saturate(155%);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(229, 9, 20, 0.95), rgba(122, 3, 9, 0.82)),
+        #111;
+      box-shadow: 0 12px 34px rgba(229, 9, 20, 0.32);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      padding: 0 13px;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-cta,
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: 0;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
+    }
+
+    .nav-cta,
+    .primary-btn {
+      color: #fff;
+      background: linear-gradient(135deg, var(--red-hot), var(--red-deep));
+      box-shadow: 0 16px 44px rgba(229, 9, 20, 0.34);
+    }
+
+    .secondary-btn {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-cta:hover,
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.32);
+      box-shadow: 0 22px 58px rgba(229, 9, 20, 0.34);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.07);
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 5px auto;
+      background: currentColor;
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 128px 0 58px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 42%, rgba(0,0,0,0.22) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.12), rgba(3,3,4,0.95)),
+        url("https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=2200&q=84") center right / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 210px;
+      z-index: -2;
+      background: linear-gradient(0deg, var(--black), transparent);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.56fr);
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 840px;
+      font-size: clamp(3.25rem, 9vw, 8.8rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .text-gradient {
+      color: transparent;
+      background: linear-gradient(135deg, #fff 0%, #ffb7bc 28%, var(--red-hot) 58%, #730006 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+      margin: 26px 0 34px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-panel {
+      align-self: stretch;
+      display: grid;
+      gap: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(18,18,23,0.74), rgba(12,12,15,0.42));
+      box-shadow: var(--shadow-black);
+      backdrop-filter: blur(20px);
+    }
+
+    .hero-card {
+      min-height: 150px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        rgba(0,0,0,0.28);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 2.35rem;
+      line-height: 1;
+    }
+
+    .hero-card span,
+    .stat-card span,
+    .tier span {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -58px;
+      bottom: -62px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(229, 9, 20, 0.38), transparent 68%);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 58px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .scroll-cue::after {
+      content: "";
+      width: 5px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--red-hot);
+      animation: wheel 1.7s infinite;
+    }
+
+    @keyframes wheel {
+      0%, 100% { transform: translateY(-8px); opacity: 0.2; }
+      45% { transform: translateY(8px); opacity: 1; }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow-black);
+      overflow: hidden;
+    }
+
+    .stat-card {
+      min-height: 180px;
+      padding: 30px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .stat-card:last-child {
+      border-right: 0;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .feature-tile {
+      min-height: 420px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.82)),
+        url("https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1600&q=82") center / cover no-repeat;
+      box-shadow: var(--shadow-black);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .service-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-tile,
+    .tier,
+    .trainer-card,
+    .testimonial,
+    .transform-copy {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.022));
+      box-shadow: var(--shadow-black);
+      backdrop-filter: blur(14px);
+    }
+
+    .mini-tile {
+      min-height: 201px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mini-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -65% auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(229,9,20,0.28), transparent 70%);
+    }
+
+    .feature-tile h3,
+    .mini-tile h3,
+    .trainer-card h3,
+    .transform-copy h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.45rem, 3vw, 2.45rem);
+      line-height: 1;
+    }
+
+    .feature-tile p,
+    .mini-tile p,
+    .trainer-card p,
+    .transform-copy p,
+    .testimonial p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .tier {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 240ms ease, border-color 240ms ease, background 240ms ease;
+    }
+
+    .tier:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.26);
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.028));
+    }
+
+    .tier.featured {
+      border-color: rgba(255,38,56,0.54);
+      box-shadow: var(--shadow-red), var(--shadow-black);
+    }
+
+    .tier.featured::before {
+      content: "Signature";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(229,9,20,0.88);
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .tier h3 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+    }
+
+    .price {
+      margin: 26px 0;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .tier ul {
+      display: grid;
+      gap: 13px;
+      padding: 0;
+      margin: 0 0 28px;
+      list-style: none;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .tier li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .tier li::before {
+      content: "";
+      flex: 0 0 9px;
+      width: 9px;
+      height: 9px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--red-hot);
+      box-shadow: 0 0 18px rgba(229, 9, 20, 0.8);
+    }
+
+    .trainers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .trainer-card {
+      overflow: hidden;
+      transition: transform 240ms ease, border-color 240ms ease;
+    }
+
+    .trainer-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    .trainer-media {
+      height: 390px;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+    }
+
+    .trainer-media img {
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.2) contrast(1.05);
+      transition: transform 500ms ease;
+    }
+
+    .trainer-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .trainer-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.88));
+    }
+
+    .trainer-body {
+      padding: 24px;
+    }
+
+    .trainer-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .trainer-tags span {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #f1d0d3;
+      background: rgba(255,255,255,0.05);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .transform-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .ba-wrap {
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-black);
+      background: #111;
+    }
+
+    .ba-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ba-panel img {
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.86) contrast(1.06);
+      transition: transform 700ms ease;
+    }
+
+    .ba-panel:hover img {
+      transform: scale(1.04);
+    }
+
+    .ba-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.78));
+    }
+
+    .ba-label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 2;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(14px);
+      font-weight: 900;
+    }
+
+    .transform-copy {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .transform-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .transform-list div {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .testimonials-shell {
+      position: relative;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(229,9,20,0.14), transparent 40%),
+        rgba(255,255,255,0.035);
+      box-shadow: var(--shadow-black);
+      overflow: hidden;
+    }
+
+    .testimonial-track {
+      display: flex;
+      transition: transform 500ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .testimonial {
+      flex: 0 0 100%;
+      min-height: 320px;
+      padding: 40px;
+      display: grid;
+      align-content: center;
+    }
+
+    .quote {
+      margin: 0 0 28px;
+      color: #fff;
+      font-size: clamp(1.45rem, 3vw, 2.8rem);
+      line-height: 1.12;
+      font-weight: 850;
+    }
+
+    .client {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border: 2px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      object-fit: cover;
+    }
+
+    .client strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .slider-btn {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .slider-btn:hover {
+      background: rgba(229,9,20,0.9);
+      transform: translateY(-2px);
+    }
+
+    .cta-band {
+      padding: 70px 0 92px;
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) auto;
+      gap: 30px;
+      align-items: center;
+      padding: 42px;
+      border: 1px solid rgba(255, 38, 56, 0.32);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(229,9,20,0.24), rgba(255,255,255,0.04) 42%, rgba(0,0,0,0.25)),
+        rgba(18,18,22,0.78);
+      box-shadow: var(--shadow-red), var(--shadow-black);
+      backdrop-filter: blur(18px);
+    }
+
+    .cta-inner h2 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 4.6rem);
+      line-height: 0.96;
+    }
+
+    .cta-inner p {
+      margin: 0;
+      max-width: 620px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+    }
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      color: rgba(255,255,255,0.56);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 35;
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, #29d366, #075e54);
+      box-shadow: 0 18px 46px rgba(37, 211, 102, 0.34);
+      transition: transform 220ms ease;
+    }
+
+    .whatsapp:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .whatsapp svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .menu-btn {
+        display: block;
+        margin-left: auto;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 10px;
+      }
+
+      .nav.open .nav-links {
+        display: flex;
+      }
+
+      .nav-links a {
+        justify-content: center;
+      }
+
+      .hero-inner,
+      .section-header,
+      .services-grid,
+      .transform-grid,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stats-grid,
+      .pricing-grid,
+      .trainers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-card:nth-child(2) {
+        border-right: 0;
+      }
+
+      .stat-card:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .hero {
+        padding-top: 112px;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(0,0,0,0.68), rgba(0,0,0,0.92)),
+          url("https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=1200&q=82") center / cover no-repeat;
+      }
+
+      .brand {
+        font-size: 0.86rem;
+      }
+
+      .hero-panel,
+      .stats-grid,
+      .pricing-grid,
+      .trainers-grid,
+      .ba-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card,
+      .stat-card:nth-child(2) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stat-card:last-child {
+        border-bottom: 0;
+      }
+
+      .hero-actions,
+      .slider-controls {
+        justify-content: stretch;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+      }
+
+      .trainer-media {
+        height: 320px;
+      }
+
+      .ba-wrap {
+        min-height: auto;
+      }
+
+      .ba-panel {
+        height: 360px;
+      }
+
+      .testimonial {
+        padding: 24px;
+        min-height: 360px;
+      }
+
+      .cta-inner {
+        padding: 28px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="#top" aria-label="ONYX Forge home">
+      <span class="brand-mark">O</span>
+      <span>ONYX Forge</span>
+    </a>
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#memberships">Memberships</a></li>
+      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <a class="nav-cta" href="#memberships">Reserve Access</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy-wrap reveal">
+          <p class="eyebrow">Private performance club</p>
+          <h1>Train inside the <span class="text-gradient">redline</span>.</h1>
+          <p class="hero-copy">
+            A luxury strength, conditioning, and recovery house for founders, athletes, and high performers who expect precision coaching, cinematic spaces, and measurable transformation.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#memberships">View Memberships</a>
+            <a class="secondary-btn" href="#results">See Transformations</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Club highlights">
+          <div class="hero-card">
+            <strong>24/7</strong>
+            <span>Members-only biometric access with concierge support.</span>
+          </div>
+          <div class="hero-card">
+            <strong>1:4</strong>
+            <span>Coach-to-member floor ratio during peak training blocks.</span>
+          </div>
+          <div class="hero-card">
+            <strong>98%</strong>
+            <span>Client retention across executive transformation programs.</span>
+          </div>
+        </aside>
+      </div>
+      <a class="scroll-cue" href="#stats" aria-label="Scroll to stats"></a>
+    </section>
+
+    <section class="section" id="stats">
+      <div class="container">
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <strong><span class="counter" data-target="18">0</span>K</strong>
+            <span>Square feet of private training, recovery, and mobility space.</span>
+          </div>
+          <div class="stat-card">
+            <strong><span class="counter" data-target="42">0</span></strong>
+            <span>Elite strength, physique, mobility, and combat coaches.</span>
+          </div>
+          <div class="stat-card">
+            <strong><span class="counter" data-target="620">0</span>+</strong>
+            <span>Documented transformations with biometric tracking.</span>
+          </div>
+          <div class="stat-card">
+            <strong><span class="counter" data-target="11">0</span></strong>
+            <span>Recovery modalities from cryo to compression therapy.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="eyebrow">The experience</p>
+            <h2>Designed like a private members club. Built like an athlete lab.</h2>
+          </div>
+          <p class="section-copy">Every detail is engineered around intensity, privacy, and recovery: low-glare lighting, calibrated equipment, coach-led programming, and a member journey that feels effortless from arrival to exit.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="feature-tile reveal">
+            <h3>Red room strength theater</h3>
+            <p>Competition racks, calibrated plates, sprint lanes, assault systems, and discreet performance tracking inside a cinematic black and red training floor.</p>
+          </article>
+          <div class="service-stack">
+            <article class="mini-tile reveal">
+              <div>
+                <p class="eyebrow">Recovery</p>
+                <h3>Reset faster</h3>
+              </div>
+              <p>Cryotherapy, infrared sauna, compression, guided breathwork, and mobility prescriptions.</p>
+            </article>
+            <article class="mini-tile reveal">
+              <div>
+                <p class="eyebrow">Nutrition</p>
+                <h3>Measured fuel</h3>
+              </div>
+              <p>Chef-built macros, blood marker reviews, supplement protocols, and travel-proof meal strategy.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="memberships">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="eyebrow">Memberships</p>
+            <h2>Premium access for people who train with intent.</h2>
+          </div>
+          <p class="section-copy">Choose your level of privacy, coaching, and recovery. All plans include club access, app-based programming, body composition scans, and invitation-only events.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="tier reveal">
+            <h3>Foundation</h3>
+            <span>For disciplined independent training.</span>
+            <div class="price">$189 <small>/mo</small></div>
+            <ul>
+              <li>Unlimited club access</li>
+              <li>Monthly InBody scan</li>
+              <li>Open gym and recovery lounge</li>
+              <li>Quarterly coach strategy call</li>
+            </ul>
+            <a class="secondary-btn" href="https://wa.me/15551234567?text=I%20want%20to%20join%20ONYX%20Forge%20Foundation">Apply Now</a>
+          </article>
+
+          <article class="tier featured reveal">
+            <h3>Executive</h3>
+            <span>For transformation with high-touch accountability.</span>
+            <div class="price">$489 <small>/mo</small></div>
+            <ul>
+              <li>Everything in Foundation</li>
+              <li>8 private coaching sessions</li>
+              <li>Weekly nutrition calibration</li>
+              <li>Priority recovery bookings</li>
+            </ul>
+            <a class="primary-btn" href="https://wa.me/15551234567?text=I%20want%20to%20join%20ONYX%20Forge%20Executive">Reserve Access</a>
+          </article>
+
+          <article class="tier reveal">
+            <h3>Black Label</h3>
+            <span>For maximum privacy and concierge execution.</span>
+            <div class="price">$980 <small>/mo</small></div>
+            <ul>
+              <li>Private suite scheduling</li>
+              <li>Unlimited personal coaching</li>
+              <li>Executive health dashboard</li>
+              <li>Travel programming concierge</li>
+            </ul>
+            <a class="secondary-btn" href="https://wa.me/15551234567?text=I%20want%20to%20join%20ONYX%20Forge%20Black%20Label">Request Invite</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trainers">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="eyebrow">Coaching team</p>
+            <h2>Elite trainers with quiet confidence and ruthless standards.</h2>
+          </div>
+          <p class="section-copy">Our coaches blend sport science, physique development, rehab-aware movement, and executive accountability so every session moves the needle.</p>
+        </div>
+
+        <div class="trainers-grid">
+          <article class="trainer-card reveal">
+            <div class="trainer-media">
+              <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=900&q=82" alt="A strength coach in a premium gym" />
+            </div>
+            <div class="trainer-body">
+              <h3>Maya Cortez</h3>
+              <p>Olympic lifting specialist with a decade of elite strength programming and shoulder-safe power development.</p>
+              <div class="trainer-tags">
+                <span>Strength</span>
+                <span>Power</span>
+                <span>Mobility</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="trainer-card reveal">
+            <div class="trainer-media">
+              <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=900&q=82" alt="A physique coach training in a dark gym" />
+            </div>
+            <div class="trainer-body">
+              <h3>Roman Hale</h3>
+              <p>Physique architect focused on lean mass, metabolic conditioning, and stage-level detail without burnout.</p>
+              <div class="trainer-tags">
+                <span>Physique</span>
+                <span>Hypertrophy</span>
+                <span>Nutrition</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="trainer-card reveal">
+            <div class="trainer-media">
+              <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=900&q=82" alt="A performance trainer with battle ropes" />
+            </div>
+            <div class="trainer-body">
+              <h3>Dev Singh</h3>
+              <p>Performance coach for entrepreneurs who need stamina, resilient joints, and repeatable energy under pressure.</p>
+              <div class="trainer-tags">
+                <span>Conditioning</span>
+                <span>Combat</span>
+                <span>Recovery</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="eyebrow">Transformations</p>
+            <h2>Before and after, tracked with precision.</h2>
+          </div>
+          <p class="section-copy">Luxury means nothing without results. Every transformation starts with baseline testing and ends with metrics the mirror can confirm.</p>
+        </div>
+
+        <div class="transform-grid">
+          <div class="ba-wrap reveal" aria-label="Before and after transformation images">
+            <div class="ba-panel">
+              <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=82" alt="Before transformation training photo" />
+              <span class="ba-label">Before</span>
+            </div>
+            <div class="ba-panel">
+              <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=82" alt="After transformation training photo" />
+              <span class="ba-label">After</span>
+            </div>
+          </div>
+          <article class="transform-copy reveal">
+            <div>
+              <h3>12-week executive recomposition</h3>
+              <p>Private coaching, meal architecture, three strength sessions, two conditioning sessions, and recovery compliance built around a high-travel calendar.</p>
+            </div>
+            <div class="transform-list">
+              <div><strong>-12.4%</strong><br /><span>Body fat reduction</span></div>
+              <div><strong>+9.8 lb</strong><br /><span>Lean mass gained</span></div>
+              <div><strong>+31%</strong><br /><span>Work capacity increase</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="eyebrow">Member voices</p>
+            <h2>Trusted by people who value time, privacy, and outcomes.</h2>
+          </div>
+          <p class="section-copy">The club is intentionally selective. Members stay because the experience is beautiful, demanding, and radically consistent.</p>
+        </div>
+
+        <div class="testimonials-shell reveal">
+          <div class="testimonial-track" id="testimonialTrack">
+            <article class="testimonial">
+              <p class="quote">“ONYX Forge feels more like a private performance lab than a gym. I dropped two suit sizes and doubled my deadlift without wasting a minute.”</p>
+              <div class="client">
+                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80" alt="Client portrait" />
+                <div><strong>Adrian Voss</strong><p>Founder, venture studio</p></div>
+              </div>
+            </article>
+            <article class="testimonial">
+              <p class="quote">“The coaching is surgical. Every rep, meal, and recovery block had a reason. It is premium because it removes friction.”</p>
+              <div class="client">
+                <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80" alt="Client portrait" />
+                <div><strong>Elena Marr</strong><p>Creative director</p></div>
+              </div>
+            </article>
+            <article class="testimonial">
+              <p class="quote">“I came for privacy and stayed for the standards. The space makes you want to train harder the moment you walk in.”</p>
+              <div class="client">
+                <img class="avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80" alt="Client portrait" />
+                <div><strong>Marcus Chen</strong><p>Private equity partner</p></div>
+              </div>
+            </article>
+          </div>
+          <div class="slider-controls" aria-label="Testimonial controls">
+            <button class="slider-btn" type="button" id="prevTestimonial" aria-label="Previous testimonial">‹</button>
+            <button class="slider-btn" type="button" id="nextTestimonial" aria-label="Next testimonial">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div class="cta-inner reveal">
+          <div>
+            <h2>Claim a private strategy session.</h2>
+            <p>Tell us your goal, schedule, training history, and privacy needs. A membership director will build the most efficient path into the club.</p>
+          </div>
+          <a class="primary-btn" href="https://wa.me/15551234567?text=I%20want%20a%20private%20strategy%20session%20at%20ONYX%20Forge">Start on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#top"><span class="brand-mark">O</span><span>ONYX Forge</span></a>
+      <span>© 2026 ONYX Forge Performance Club. Built for serious work.</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/15551234567?text=I%20want%20to%20book%20a%20tour%20at%20ONYX%20Forge" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.04 3C8.88 3 3.06 8.72 3.06 15.75c0 2.3.63 4.54 1.82 6.49L3 29l6.97-1.79a13.18 13.18 0 0 0 6.07 1.51C23.2 28.72 29 23 29 15.97S23.2 3 16.04 3Zm0 23.55c-1.95 0-3.85-.51-5.52-1.49l-.4-.23-4.14 1.06 1.11-4.01-.26-.41a10.45 10.45 0 0 1-1.61-5.72c0-5.84 4.85-10.58 10.81-10.58 5.95 0 10.8 4.84 10.8 10.8 0 5.84-4.85 10.58-10.79 10.58Zm5.93-7.93c-.32-.16-1.9-.92-2.2-1.03-.29-.11-.51-.16-.72.16-.21.31-.83 1.02-1.01 1.23-.19.21-.37.24-.69.08-.32-.16-1.36-.49-2.59-1.56-.96-.84-1.61-1.88-1.8-2.19-.19-.32-.02-.49.14-.65.15-.14.32-.37.48-.56.16-.18.21-.31.32-.52.1-.21.05-.39-.03-.55-.08-.16-.72-1.7-.99-2.33-.26-.61-.53-.53-.72-.54l-.61-.01c-.21 0-.55.08-.84.39-.29.32-1.1 1.06-1.1 2.58 0 1.52 1.13 2.99 1.29 3.2.16.21 2.22 3.34 5.37 4.69.75.32 1.34.51 1.8.65.76.24 1.45.2 1.99.12.61-.09 1.9-.76 2.17-1.49.27-.74.27-1.37.19-1.49-.08-.13-.29-.21-.61-.36Z"/>
+    </svg>
+  </a>
+
+  <script>
+    const nav = document.querySelector(".nav");
+    const menuBtn = document.querySelector(".menu-btn");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal").forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+      revealObserver.observe(element);
+    });
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const counter = entry.target;
+        const target = Number(counter.dataset.target);
+        const duration = 1600;
+        const start = performance.now();
+
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = Math.floor(eased * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+        counterObserver.unobserve(counter);
+      });
+    }, { threshold: 0.7 });
+
+    document.querySelectorAll(".counter").forEach((counter) => counterObserver.observe(counter));
+
+    const track = document.getElementById("testimonialTrack");
+    const slides = Array.from(track.children);
+    const prev = document.getElementById("prevTestimonial");
+    const next = document.getElementById("nextTestimonial");
+    let activeSlide = 0;
+    let sliderTimer;
+
+    function setSlide(index) {
+      activeSlide = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${activeSlide * 100}%)`;
+    }
+
+    function restartSlider() {
+      clearInterval(sliderTimer);
+      sliderTimer = setInterval(() => setSlide(activeSlide + 1), 5200);
+    }
+
+    prev.addEventListener("click", () => {
+      setSlide(activeSlide - 1);
+      restartSlider();
+    });
+
+    next.addEventListener("click", () => {
+      setSlide(activeSlide + 1);
+      restartSlider();
+    });
+
+    restartSlider();
+  </script>
+</body>
+</html>
